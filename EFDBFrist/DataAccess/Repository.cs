@@ -180,6 +180,12 @@ namespace EFDBFrist
         }
 
 
+        public async Task<List<TResult>> GetListAsync<T, TResult>(Expression<Func<T, bool>> predicate, Expression<Func<T, TResult>> selector, bool isEager = false) where T : class
+        {
+            var result = await Context.Query(predicate, selector, isEager).ToListAsyncSafe();
+
+            return result;
+        }
         public void Dispose()
         {
             throw new NotImplementedException();
